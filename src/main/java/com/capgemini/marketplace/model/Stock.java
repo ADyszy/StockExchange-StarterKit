@@ -18,6 +18,10 @@ public class Stock {
 		return history;
 	}
 	
+	public StockRate getActualRate() {
+		return this.history.get(this.history.size()-1);
+	}
+	
 	public void setHistory(List<StockRate> history) {
 		this.history = history;
 	}

@@ -16,9 +16,9 @@ public class DataServiceTest extends TestCase {
 		// given
 		List<Stock> stockList = dataService.getActuallStocks(10);
 		//then
-		assertEquals(stockList.size(), 5);
+		assertEquals(stockList.size(), 5); 
 	}
-
+ 
 	@Test
 	public void testShouldLoadStockForKGHM() {
 		// given
@@ -39,6 +39,29 @@ public class DataServiceTest extends TestCase {
 		List<Stock> stockList = dataService.getActuallStocks(10);
 		//then
 		assertTrue(allHaveHistory(stockList));
+	}
+	
+	@Test
+	public void testStockShouldHaveWholeHistory() {
+		// given
+		List<Stock> stockList = dataService.getActuallStocks(10);
+		//then
+		assertTrue(stockList.get(0).getHistory().size() == 10);
+	}
+	
+	@Test
+	public void testShouldSortStockByDate() {
+		// given
+		List<Stock> stockList = dataService.getActuallStocks(10);
+		//then
+		assertTrue(stockList.get(0).getHistory().size() == 10);
+	}
+	
+	@Test
+	public void testShouldReturnNullBecauseOfTooManyDays() {
+		// given //when
+		//then
+		assertNull(dataService.getActuallStocks(9999999));
 	}
 	
 	private boolean allHaveHistory(List<Stock> stockList) {

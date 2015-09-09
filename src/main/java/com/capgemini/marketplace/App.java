@@ -13,4 +13,4 @@ public class App {
 //		gamer.getStockBrocker().setName("alalala");
 //		System.out.println(gamer.getStockBrocker().getName());
 	}
-}
+} 

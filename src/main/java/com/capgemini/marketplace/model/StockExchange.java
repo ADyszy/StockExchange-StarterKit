@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.capgemini.marketplace.data.DataService;
-
+ 
 public class StockExchange {
 	
 	private int day = 0;
+	private boolean end = false;
 	
 	@Autowired
 	private DataService dataService;
@@ -31,5 +32,21 @@ public class StockExchange {
 		this.dataService = dataService;
 	}
 	
-		
+	public void updateStocks() {
+		List<Stock> list = dataService.getActuallStocks(day);
+		if (list == null) {
+			end = true;
+			return;
+		}
+		actualStocks = list;
+	}
+	
+	public boolean goToNewDay(){
+		day++;
+		return !end;
+	}
+	
+	public boolean simulationEnded(){
+		return end;
+	}
 }

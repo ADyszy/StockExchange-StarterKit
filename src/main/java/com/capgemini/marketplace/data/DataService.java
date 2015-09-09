@@ -23,9 +23,10 @@ public class DataService {
 	private String source = "src/main/csv/dane.csv";
 	private BufferedReader bufferedReader;
 	private String singleLine = "";
-	private List<DataObject> objects;
+	private List<DataObject> objects; 
 	private Map<String, Stock> stockMap;
-
+	private int maxDay;
+	
 	public DataService() {
 		stockMap = new HashMap<String, Stock>();
 		objects = new ArrayList<DataObject>();
@@ -47,25 +48,31 @@ public class DataService {
 	}
 
 	private Date convertDate(DataObject dataObject) {
-		return new Date(Integer.valueOf(dataObject.getDate().substring(0, 4)),
+		return new Date(Integer.valueOf(dataObject.getDate().substring(6, 8)),
 				Integer.valueOf(dataObject.getDate().substring(4, 6)),
-				Integer.valueOf(dataObject.getDate().substring(6, 8)));
+				Integer.valueOf(dataObject.getDate().substring(0, 4)));
 	}
 
 	private void placeDataObjectsInMap() {
 		for (DataObject dataObject : objects) {
-			if (!stockMap.containsKey(dataObject.getName())) {
-				Stock newStock = new Stock();
-				newStock.setName(dataObject.getName());
-				stockMap.put(dataObject.getName(), newStock);
-			}
-			Date dateResult = convertDate(dataObject);
+			addNewStockIfNew(dataObject);
 			stockMap.get(dataObject.getName()).getHistory()
-					.add(new StockRate(dateResult, Double.valueOf(dataObject.getRate())));
+					.add(new StockRate(convertDate(dataObject), Double.valueOf(dataObject.getRate())));
+		}
+		sortStocksByDate(); 
+		setUpDaysOfSimulation();
+	}
+	
+	private void addNewStockIfNew(DataObject dataObject) {
+		if (!stockMap.containsKey(dataObject.getName())) {
+			Stock newStock = new Stock();
+			newStock.setName(dataObject.getName());
+			stockMap.put(dataObject.getName(), newStock);
 		}
 	}
 
 	public List<Stock> getActuallStocks(int day) {
+		if (day >= maxDay) return null;
 		List<Stock> actuallStocks = new ArrayList<Stock>();
 		stockMap.keySet().forEach(key -> actuallStocks.add(createActuallStock(stockMap.get(key), day)));
 		return actuallStocks;
@@ -82,5 +89,9 @@ public class DataService {
 		Ordering<StockRate> ordering = Ordering.natural();
 		stockMap.values().forEach(value -> Collections.sort(value.getHistory(), ordering));
 	}
-
+	
+	private void setUpDaysOfSimulation() {
+		stockMap.values().forEach(value -> maxDay = Math.max(value.getHistory().size(), maxDay));
+	}
+	
 }
