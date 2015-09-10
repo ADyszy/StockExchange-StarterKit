@@ -8,7 +8,7 @@ import com.capgemini.marketplace.data.DataService;
  
 public class StockExchange {
 	
-	private int day = 0;
+	private int day = 1;
 	private boolean end = false;
 	
 	@Autowired
@@ -32,16 +32,16 @@ public class StockExchange {
 		this.dataService = dataService;
 	}
 	
-	public void updateStocks() {
+	public boolean updateStocks() {
 		List<Stock> list = dataService.getActuallStocks(day);
 		if (list == null) {
-			end = true;
-			return;
+			return !(end = true);
 		}
 		actualStocks = list;
+		return goToNewDay();
 	}
 	
-	public boolean goToNewDay(){
+	private boolean goToNewDay(){
 		day++;
 		return !end;
 	}

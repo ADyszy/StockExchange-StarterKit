@@ -14,12 +14,16 @@ public class Stock {
 		history = new ArrayList<StockRate>();
 	}
 	
+	public Stock(List<StockRate> history) {
+		this.history = history;
+	}
+	
 	public List<StockRate> getHistory() {
 		return history;
 	}
 	
 	public StockRate getActualRate() {
-		return this.history.get(this.history.size()-1);
+		return this.history.get(this.history.size()-1); 
 	}
 	
 	public void setHistory(List<StockRate> history) {
@@ -36,6 +40,10 @@ public class Stock {
 		for (StockRate stockRate : history)
 			str += stockRate.getDate() + " : " + stockRate.getValue() + "\n";
 		return str;
+	}
+	
+	public double finalValue(int amount){
+		return amount * getActualRate().getValue();
 	}
 	
 }

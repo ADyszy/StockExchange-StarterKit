@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.marketplace.exception.NoStrategySetException;
+import com.capgemini.marketplace.exception.NotOwnedStockReturnException;
+import com.capgemini.marketplace.exception.TooPoorWalletException;
 import com.capgemini.marketplace.strategy.BuyAndSellStrategy;
 
 // TODO buy and sell interface. 
@@ -28,10 +30,23 @@ public class Gamer {
 	}
 	
 	public void play() throws NoStrategySetException{
-		if(strategy != null)strategy.play(this);
-		throw new NoStrategySetException();
+		if(strategy == null)throw new NoStrategySetException();
+		strategy.play(this);
 	}
-			
+	
+	
+	public void buyStocks(Stock stock, int amount) throws TooPoorWalletException {
+		double price = getStockBrocker().buyCost(stock, amount);
+		getCashWallet().pay(price);
+		getStockWallet().getBoughtStocks(stock, amount);
+	}
+	
+	public void sellStocks(Stock stock, int amount) throws NotOwnedStockReturnException {
+		double price = getStockBrocker().sellCost(stock, amount);
+		getStockWallet().returnSoldStocks(stock, amount);
+		getCashWallet().earn(price);
+	}
+	
 	public StockBroker getStockBrocker() {
 		return stockBrocker;
 	}

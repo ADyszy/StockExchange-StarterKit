@@ -24,7 +24,6 @@ public class StockExchangeTest {
 	public void testShouldLoadStocksFromTheFirstDay() {
 		// given
 		// when
-		stockExchange.goToNewDay();
 		stockExchange.updateStocks();
 		// then
 		assertEquals(1, stockExchange.getStocks().get(0).getHistory().size());
@@ -34,10 +33,9 @@ public class StockExchangeTest {
 	@Test
 	public void testShouldLoadStocksFromTheFifthDay() {
 		// given
-		for (int i=0; i<5; i++)
-			stockExchange.goToNewDay();
 		// when
-		stockExchange.updateStocks();
+		for (int i=0; i<5; i++)
+			stockExchange.updateStocks();
 		// then
 		assertEquals(5, stockExchange.getStocks().get(0).getHistory().size());
 		assertEquals(0, stockExchange.getStocks().get(4).getHistory().get(4).getDate().compareTo(new Date(8, 1, 2013)));
@@ -46,8 +44,7 @@ public class StockExchangeTest {
 	@Test
 	public void testShouldEndSimulationAfterLastDayLoaded(){
 		// when
-		while(stockExchange.goToNewDay()) {
-			stockExchange.updateStocks();
+		while(stockExchange.updateStocks()) {
 			// check if not null all the simulation time.
 			assertNotNull(stockExchange.getStocks());
 		}
