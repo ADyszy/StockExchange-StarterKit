@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.capgemini.marketplace.exception.NoStrategySetException;
 import com.capgemini.marketplace.strategy.BuyAndSellStrategy;
 
+// TODO buy and sell interface. 
 @Component
 public class Gamer {
 	
@@ -22,8 +23,8 @@ public class Gamer {
 	private BuyAndSellStrategy strategy;
 	
 	public Gamer() {
-		this.cashWallet = new CashWallet(10000);
-		this.stockWallet = new StockWallet();
+		setCashWallet(new CashWallet(10000));
+		setStockWallet(new StockWallet());
 	}
 	
 	public void play() throws NoStrategySetException{

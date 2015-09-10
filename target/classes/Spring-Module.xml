@@ -12,6 +12,7 @@
   	
    <bean id="gamer" class="com.capgemini.marketplace.model.Gamer"></bean>
    <bean id="stockBroker" class="com.capgemini.marketplace.model.StockBroker"></bean>
-   <bean id="cashWallet" class="com.capgemini.marketplace.model.CashWallet"></bean>
+   <bean id="stockExchange" class="com.capgemini.marketplace.model.StockExchange"></bean>
+   <bean id="dataService" class="com.capgemini.marketplace.data.DataService"></bean>
 </beans>
 	

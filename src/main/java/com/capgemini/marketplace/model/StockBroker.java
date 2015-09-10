@@ -14,7 +14,7 @@ public class StockBroker {
 	
 	public double sellCost(Stock stock, int amount){
 		double cost = stock.getActualRate().getValue();
-		return round((cost + (PERCENT*cost))*amount, 2);
+		return round((cost - (PERCENT*cost))*amount, 2);
 	}
 	
 	public static double round(double value, int places) {

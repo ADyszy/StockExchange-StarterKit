@@ -24,7 +24,7 @@ public class StockBrokerTest {
 		stock.setHistory(Arrays.asList(new StockRate(new Date(1, 1, 2000), 94.4)));
 		// then
 		assertEquals(495.60, stockBroker.buyCost(stock, 5), 0.01);
-		assertEquals(495.60, stockBroker.sellCost(stock, 5), 0.01);
+		assertEquals(448.40, stockBroker.sellCost(stock, 5), 0.01);
 	}
 
 }
