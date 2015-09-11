@@ -34,6 +34,9 @@ public class Gamer {
 		strategy.play(this);
 	}
 	
+	public double getTotalEarnings() {
+		return cashWallet.getCash() + stockWallet.totalValue();
+	}
 	
 	public void buyStocks(Stock stock, int amount) throws TooPoorWalletException {
 		double price = getStockBrocker().buyCost(stock, amount);

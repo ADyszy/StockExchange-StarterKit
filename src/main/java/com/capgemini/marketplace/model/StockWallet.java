@@ -51,4 +51,12 @@ public class StockWallet {
 		return null;
 	}
 	
+	public double totalValue() {
+		double total = 0;
+		for (Stock stock : this.shares.keySet()) {
+			total += stock.finalValue(shares.get(stock));
+		}
+		return total;
+	}
+	
 }
