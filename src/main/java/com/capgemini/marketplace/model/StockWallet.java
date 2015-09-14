@@ -12,10 +12,6 @@ public class StockWallet {
 		setShares(new HashMap<>());
 	}
 	
-	public double getWalletValue(){
-		return 0;
-	}
-
 	public Map<Stock, Integer> getShares() {
 		return shares;
 	}
@@ -24,9 +20,14 @@ public class StockWallet {
 		this.shares = shares;
 	}
 	
+	// TODO it better.. 
 	public void getBoughtStocks(Stock stock, int amount) {
-		if (shares.containsKey(stock)) 
-			amount += shares.get(stock);
+		Stock tmp = getStockByName(stock.getName());
+		if (tmp != null) {
+			amount += shares.get(tmp);
+			shares.put(tmp, amount);
+			return;
+		}
 		shares.put(stock, amount);
 	}
 	
@@ -58,6 +59,15 @@ public class StockWallet {
 			total += stockValue - stockBroker.margin(stockValue);
 		}
 		return total;
+	}
+	
+	@Override
+	public String toString() {
+		String stocks = "";
+		for (Stock key : getShares().keySet()) {
+			stocks += key.getName() + " (" + getShares().get(key) + ") " + "act. rate: " + key.getActualRate().getValue() + "\n";
+		}
+		return stocks;
 	}
 	
 }

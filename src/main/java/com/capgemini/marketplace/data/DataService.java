@@ -59,7 +59,7 @@ public class DataService {
 			addNewStockIfNew(dataObject);
 			stockMap.get(dataObject.getName()).getHistory()
 					.add(new StockRate(convertDate(dataObject), Double.valueOf(dataObject.getRate())));
-		}
+		} 
 		sortStocksByDate(); 
 		setUpDaysOfSimulation();
 	}

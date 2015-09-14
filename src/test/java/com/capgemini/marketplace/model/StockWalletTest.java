@@ -30,7 +30,7 @@ public class StockWalletTest {
 		stockWallet.getBoughtStocks(stock, amount);
 		//then
 		assertEquals(200, stockWallet.getAmountOfOwnedStock("STCK"));
-	}
+	} 
 
 	@Test
 	public void testShouldCheckIfStocksAreSelledCorrectly() throws NotOwnedStockReturnException {
@@ -55,6 +55,19 @@ public class StockWalletTest {
 		// when
 		stockWallet.returnSoldStocks(stock, 500);
 		//then ..
+	}
+	
+	public void testShouldCheckIfMultipleStocksAreBoughtCorrectly() throws NotOwnedStockReturnException {
+		// given
+		int amount = 200;
+		stock = new Stock(Arrays.asList(new StockRate(null,30)));
+		stock.setName("STCK");
+		stockWallet.getBoughtStocks(stock, amount);
+		// when
+		stockWallet.getBoughtStocks(stock, 250);
+		//then
+		assertEquals(250, stockWallet.getShares().get(stock).intValue());
+		assertEquals(1, stockWallet.getShares().keySet().size());
 	}
 
 }

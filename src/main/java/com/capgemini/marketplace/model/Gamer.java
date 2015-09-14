@@ -58,7 +58,7 @@ public class Gamer {
 	}
 	
 	public boolean isBroke(){
-		return getTotalEarnings() == 0;
+		return getTotalMoney() == 0;
 	}
 	
 	public StockBroker getStockBrocker() {
@@ -95,6 +95,14 @@ public class Gamer {
 	
 	public void setStrategy(BuyAndSellStrategy buyAndSellStrategy) {
 		this.strategy = buyAndSellStrategy;
+	}
+	
+	@Override
+	public String toString() {
+		String sGamer = "gamer status:\n";
+		sGamer += "cash: " + getCashWallet().getCash();
+		sGamer += "\nstocks owned: " + "\n" + stockWallet.toString();
+		return sGamer;
 	}
 	
 }

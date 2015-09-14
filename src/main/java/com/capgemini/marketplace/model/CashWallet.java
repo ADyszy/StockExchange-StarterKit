@@ -1,5 +1,6 @@
 package com.capgemini.marketplace.model;
 
+import com.capgemini.marketplace.calculation.StockCalculations;
 import com.capgemini.marketplace.exception.TooPoorWalletException;
 
 public class CashWallet {
@@ -10,7 +11,7 @@ public class CashWallet {
 	}
 	
 	public double getCash() {
-		return cash;
+		return StockCalculations.round(cash, 2);
 	}
 
 	public void setCash(double cash) {

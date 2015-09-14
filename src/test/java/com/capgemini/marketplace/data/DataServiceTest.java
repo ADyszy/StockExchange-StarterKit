@@ -18,6 +18,14 @@ public class DataServiceTest extends TestCase {
 		//then
 		assertEquals(stockList.size(), 5); 
 	}
+	
+	@Test
+	public void testShouldGetActuallStocks() {
+		// given
+		List<Stock> stockList = dataService.getActuallStocks(10);
+		// then
+		assertEquals(5, stockList.size());
+	}
  
 	@Test
 	public void testShouldLoadStockForKGHM() {
@@ -26,7 +34,7 @@ public class DataServiceTest extends TestCase {
 		//then
 		assertTrue(containsCompany(stockList, "KGHM"));
 	}
-	
+	 
 	private boolean containsCompany(List<Stock> stockList, String companyName) {
 		for (Stock stock : stockList)
 			if (stock.getName().equals(companyName)) return true;
