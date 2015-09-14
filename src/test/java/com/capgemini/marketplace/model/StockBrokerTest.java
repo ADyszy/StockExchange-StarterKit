@@ -23,8 +23,8 @@ public class StockBrokerTest {
 		// when
 		stock.setHistory(Arrays.asList(new StockRate(new Date(1, 1, 2000), 94.4)));
 		// then
-		assertEquals(495.60, stockBroker.buyCost(stock, 5), 0.01);
-		assertEquals(448.40, stockBroker.sellCost(stock, 5), 0.01);
+		assertEquals(474.36, stockBroker.buyCost(stock, 5), 0.01);
+		assertEquals(469.64, stockBroker.sellCost(stock, 5), 0.01);
 	}
 
 }
