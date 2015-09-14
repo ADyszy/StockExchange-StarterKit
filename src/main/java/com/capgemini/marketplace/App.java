@@ -8,13 +8,13 @@ import com.capgemini.marketplace.calculation.StockCalculations;
 import com.capgemini.marketplace.exception.NoStrategySetException;
 import com.capgemini.marketplace.model.Gamer;
 import com.capgemini.marketplace.model.StockExchange;
-import com.capgemini.marketplace.strategy.impl.StupidRandomStrategy;
+import com.capgemini.marketplace.strategy.impl.PredictionBasedStrategy;
 
 public class App {
 	
 	public static double runSimulation(ApplicationContext context) throws NoStrategySetException{
 		Gamer gamer = (Gamer) context.getBean("gamer");
-		gamer.setStrategy(new StupidRandomStrategy(gamer));
+		gamer.setStrategy(new PredictionBasedStrategy(gamer));
 		StockExchange stockExchange = (StockExchange) context.getBean("stockExchange");
 		do {
 			gamer.play();
