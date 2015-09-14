@@ -58,7 +58,7 @@ public class Gamer {
 	}
 	
 	public boolean isBroke(){
-		return getTotalMoney() == 0;
+		return getTotalMoney() <= 0.01;
 	}
 	
 	public StockBroker getStockBrocker() {

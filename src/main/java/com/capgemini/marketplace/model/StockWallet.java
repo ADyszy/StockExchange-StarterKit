@@ -20,7 +20,7 @@ public class StockWallet {
 		this.shares = shares;
 	}
 	
-	// TODO it better.. 
+	// TODO it better.. Complexity is to big.
 	public void getBoughtStocks(Stock stock, int amount) {
 		Stock tmp = getStockByName(stock.getName());
 		if (tmp != null) {
@@ -44,7 +44,7 @@ public class StockWallet {
 		return this.shares.get(stock);
 	}
 	
-	private Stock getStockByName(String name) {
+	public Stock getStockByName(String name) {
 		for (Stock stock : this.shares.keySet()) {
 			if (stock.getName().equals(name))
 				return stock;

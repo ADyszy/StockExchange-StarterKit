@@ -36,6 +36,7 @@ public class StockExchange {
 		List<Stock> list = dataService.getActuallStocks(day);
 		if (list == null) {
 			return !(end = true);
+			// hmm..
 		}
 		actualStocks = list;
 		return goToNewDay();

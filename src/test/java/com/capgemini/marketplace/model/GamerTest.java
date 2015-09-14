@@ -76,4 +76,5 @@ public class GamerTest {
 		assertEquals(startCash + 25 - 25*0.005, gamer.getCashWallet().getCash(), 0.01);
 	}
 	
+	
 }
