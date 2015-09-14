@@ -5,19 +5,23 @@ import java.math.RoundingMode;
 
 public class StockBroker {
 	
-	private static final double PERCENT = 0.05; 
+	private static final double PERCENT = 0.005; 
 	
 	public double buyCost(Stock stock, int amount) {
 		double cost = stock.getActualRate().getValue();
-		return round((cost + (PERCENT*cost))*amount, 2);
+		return round((cost + margin(cost))*amount, 2);
 	}
 	
 	public double sellCost(Stock stock, int amount){
 		double cost = stock.getActualRate().getValue();
-		return round((cost - (PERCENT*cost))*amount, 2);
+		return round((cost - margin(cost))*amount, 2);
 	}
 	
-	public static double round(double value, int places) {
+	public double margin(double value) {
+		return PERCENT*value;
+	}
+	
+	private static double round(double value, int places) {
 	    if (places < 0) throw new IllegalArgumentException();
 
 	    BigDecimal bd = new BigDecimal(value);

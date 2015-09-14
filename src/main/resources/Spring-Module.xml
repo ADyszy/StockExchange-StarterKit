@@ -14,5 +14,6 @@
    <bean id="stockBroker" class="com.capgemini.marketplace.model.StockBroker"></bean>
    <bean id="stockExchange" class="com.capgemini.marketplace.model.StockExchange"></bean>
    <bean id="dataService" class="com.capgemini.marketplace.data.DataService"></bean>
+	
 </beans>
 	

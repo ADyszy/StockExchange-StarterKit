@@ -24,18 +24,26 @@ public class Gamer {
 		
 	private BuyAndSellStrategy strategy;
 	
+	private double startCash;
+	
 	public Gamer() {
-		setCashWallet(new CashWallet(10000));
+		startCash = 10000;
+		setCashWallet(new CashWallet(startCash));
 		setStockWallet(new StockWallet());
 	}
 	
 	public void play() throws NoStrategySetException{
 		if(strategy == null)throw new NoStrategySetException();
-		strategy.play(this);
+		strategy.play();
+	}
+	
+	public double getTotalMoney() {
+		return cashWallet.getCash() + stockWallet.totalValue(stockBrocker);
 	}
 	
 	public double getTotalEarnings() {
-		return cashWallet.getCash() + stockWallet.totalValue();
+		System.out.println(cashWallet.getCash() + stockWallet.totalValue(stockBrocker));
+		return cashWallet.getCash() + stockWallet.totalValue(stockBrocker) - startCash;
 	}
 	
 	public void buyStocks(Stock stock, int amount) throws TooPoorWalletException {
@@ -48,6 +56,10 @@ public class Gamer {
 		double price = getStockBrocker().sellCost(stock, amount);
 		getStockWallet().returnSoldStocks(stock, amount);
 		getCashWallet().earn(price);
+	}
+	
+	public boolean isBroke(){
+		return getTotalEarnings() == 0;
 	}
 	
 	public StockBroker getStockBrocker() {

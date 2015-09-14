@@ -20,7 +20,7 @@ import com.google.common.collect.Ordering;
 
 @Service
 public class DataService {
-	private String source = "src/main/csv/dane.csv";
+	private String source;
 	private BufferedReader bufferedReader;
 	private String singleLine = "";
 	private List<DataObject> objects; 
@@ -28,6 +28,7 @@ public class DataService {
 	private int maxDay;
 	
 	public DataService() {
+		source = "src/main/csv/dane.csv";
 		stockMap = new HashMap<String, Stock>();
 		objects = new ArrayList<DataObject>();
 		try {

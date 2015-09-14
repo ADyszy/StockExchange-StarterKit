@@ -7,18 +7,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.capgemini.marketplace.exception.NoStrategySetException;
 import com.capgemini.marketplace.model.Gamer;
 import com.capgemini.marketplace.model.StockExchange;
-import com.capgemini.marketplace.strategy.impl.StupidStrategy;
+import com.capgemini.marketplace.strategy.impl.StupidRandomStrategy;
 
 public class App {
 	
 	public static double runSimulation(ApplicationContext context) throws NoStrategySetException{
 		Gamer gamer = (Gamer) context.getBean("gamer");
-		gamer.setStrategy(new StupidStrategy());
+		gamer.setStrategy(new StupidRandomStrategy(gamer));
 		StockExchange stockExchange = (StockExchange) context.getBean("stockExchange");
 		do {
 			gamer.play();
-		}while (stockExchange.updateStocks());
-		return gamer.getTotalEarnings();
+		}while (stockExchange.updateStocks() && gamer.isBroke());
+		return gamer.getTotalMoney();
 	}
 	
 	public static void main(String[] args) throws NoStrategySetException {
