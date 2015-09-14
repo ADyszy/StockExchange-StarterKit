@@ -42,7 +42,6 @@ public class Gamer {
 	}
 	
 	public double getTotalEarnings() {
-		System.out.println(cashWallet.getCash() + stockWallet.totalValue(stockBrocker));
 		return cashWallet.getCash() + stockWallet.totalValue(stockBrocker) - startCash;
 	}
 	

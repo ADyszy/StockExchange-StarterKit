@@ -4,6 +4,7 @@ package com.capgemini.marketplace;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.capgemini.marketplace.calculation.StockCalculations;
 import com.capgemini.marketplace.exception.NoStrategySetException;
 import com.capgemini.marketplace.model.Gamer;
 import com.capgemini.marketplace.model.StockExchange;
@@ -18,7 +19,7 @@ public class App {
 		do {
 			gamer.play();
 		}while (stockExchange.updateStocks() && gamer.isBroke());
-		return gamer.getTotalMoney();
+		return StockCalculations.round(gamer.getTotalEarnings(), 2);
 	}
 	
 	public static void main(String[] args) throws NoStrategySetException {
